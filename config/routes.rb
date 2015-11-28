@@ -13,12 +13,14 @@ Spina::Engine.routes.draw do
       end
     end
 
+    devise_for :users, class_name: "Spina::User", module: :devise
+    
     resources :users
-
-    # Sessions
-    resources :sessions
-    get "login" => "sessions#new"
-    get "logout" => "sessions#destroy"
+    
+    devise_scope :user do
+      get "/login" => "devise/sessions#new"
+      delete "/logout" => "devise/sessions#destroy"
+    end
 
     # Media library
     get 'media_library' => 'photos#index', as: "media_library"

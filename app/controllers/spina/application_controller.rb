@@ -5,6 +5,10 @@ module Spina
     include ApplicationHelper
 
     private
+    
+    def after_sign_in_path_for(resource)
+      spina.admin_root_url
+    end
 
     def current_ability
       @current_ability ||= Ability.new(current_user)
@@ -14,11 +18,6 @@ module Spina
       @current_theme = ::Spina.themes.detect{|theme| theme.name == current_account.theme }
     end
     helper_method :current_theme
-
-    def current_user
-      @current_user ||= User.where(id: session[:user_id]).first if session[:user_id]
-    end
-    helper_method :current_user
 
     def current_account
       @current_account ||= Account.first

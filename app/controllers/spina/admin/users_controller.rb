@@ -56,7 +56,7 @@ module Spina
       end
 
       def user_params
-        params.require(:user).permit(:admin, :email, :name, :password_digest, :password, :password_confirmation, :last_logged_in)
+        params.require(:user).permit(:admin, :email, :name, :password, :password_confirmation)
       end
       
     end
